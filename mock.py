@@ -29,15 +29,25 @@ def create_customers():
 
 def create_product_customer_link():
     with Session(engine) as session:
-        purchase_1 = CustomerProductLink()
+        purchase_1 = CustomerProductLink(customer_id=1, product_id=1, purchase_date="01/11/2024")
+        purchase_2 = CustomerProductLink(customer_id=1, product_id=2, purchase_date="01/11/2024")
+        purchase_3 = CustomerProductLink(customer_id=2, product_id=2, purchase_date="24/12/2023")
 
         session.add(purchase_1)
+        session.add(purchase_2)
+        session.add(purchase_3)
+
         session.commit()
+
         session.refresh(purchase_1)
+        session.refresh(purchase_2)
+        session.refresh(purchase_3)
 
 
 def main():
-    create_db_and_tables()
+    create_products()
+    create_customers()
+    create_product_customer_link()
 
 if __name__ == "__main__":
     main()

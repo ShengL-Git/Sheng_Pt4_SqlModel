@@ -18,8 +18,6 @@ class ProductBase(SQLModel):
 
 
 class CustomerProductLinkBase(SQLModel):
-    customer_id: Optional[int] = Field(foreign_key="customer.customer_id", primary_key=True)
-    product_id: Optional[int] = Field(foreign_key="product.product_id", primary_key=True)
     purchase_date: str
 
 
@@ -32,8 +30,8 @@ class Product(ProductBase, table=True):
 
 
 class CustomerProductLink(CustomerProductLinkBase, table=True):
-    customer: Optional[Customer] = Relationship(back_populates="")
-    product: Optional[Product] = Field(default=None, primary_key=True)
+    customer_id: Optional[int] = Field(foreign_key="customer.customer_id", primary_key=True)
+    product_id: Optional[int] = Field(foreign_key="product.product_id", primary_key=True)
 
 
 class CustomerPublic(CustomerBase):
