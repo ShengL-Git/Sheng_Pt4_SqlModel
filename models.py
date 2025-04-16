@@ -41,3 +41,11 @@ class CustomerPublic(CustomerBase):
 
 class ProductPublic(ProductBase):
     product_id: int = Field(index=True, primary_key=True)
+
+
+class CustomerCreate(CustomerBase):
+    pass
+
+
+class ProductCreate(ProductBase):
+    pass
