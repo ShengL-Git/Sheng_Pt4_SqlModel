@@ -1,6 +1,7 @@
+from datetime import date
 from typing import Optional
 
-from sqlmodel import SQLModel, Field, Relationship
+from sqlmodel import SQLModel, Field
 
 
 # Relación N:M -> Clientes y Productos -> un cliente compra muchos productos, y un producto es comprado por muchos clientes.
@@ -18,7 +19,7 @@ class ProductBase(SQLModel):
 
 
 class CustomerProductLinkBase(SQLModel):
-    purchase_date: str
+    purchase_date: date
 
 
 class Customer(CustomerBase, table=True):

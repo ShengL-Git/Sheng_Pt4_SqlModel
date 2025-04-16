@@ -1,6 +1,7 @@
 from sqlmodel import Session
 from models import Customer, Product, CustomerProductLink
 from database import engine, create_db_and_tables
+from datetime import date
 
 
 def create_products():
@@ -29,9 +30,9 @@ def create_customers():
 
 def create_product_customer_link():
     with Session(engine) as session:
-        purchase_1 = CustomerProductLink(customer_id=1, product_id=1, purchase_date="01/11/2024")
-        purchase_2 = CustomerProductLink(customer_id=1, product_id=2, purchase_date="01/11/2024")
-        purchase_3 = CustomerProductLink(customer_id=2, product_id=2, purchase_date="24/12/2023")
+        purchase_1 = CustomerProductLink(customer_id=1, product_id=1, purchase_date=date(day=1, month=11, year=2024))
+        purchase_2 = CustomerProductLink(customer_id=1, product_id=2, purchase_date=date(day=1, month=11, year=2024))
+        purchase_3 = CustomerProductLink(customer_id=2, product_id=2, purchase_date=date(day=24, month=12, year=2023))
 
         session.add(purchase_1)
         session.add(purchase_2)
@@ -45,6 +46,7 @@ def create_product_customer_link():
 
 
 def main():
+    create_db_and_tables()
     create_products()
     create_customers()
     create_product_customer_link()
