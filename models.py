@@ -36,7 +36,7 @@ class CustomerProductLink(CustomerProductLinkBase, table=True):
 
 
 class CustomerPublic(CustomerBase):
-    cutomer_id: int = Field(index=True, primary_key=True)
+    customer_id: int = Field(index=True, primary_key=True)
 
 
 class ProductPublic(ProductBase):
@@ -46,6 +46,15 @@ class ProductPublic(ProductBase):
 class CustomerCreate(CustomerBase):
     pass
 
+class CustomerUpdate(SQLModel):
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
 
 class ProductCreate(ProductBase):
     pass
+
+class ProductUpdate(SQLModel):
+    product_name: Optional[str] = None
+    stock: Optional[int] = None
+    category: Optional[str] = None
+    price: Optional[float] = None
