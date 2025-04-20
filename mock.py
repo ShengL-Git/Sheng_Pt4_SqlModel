@@ -1,5 +1,5 @@
 from sqlmodel import Session
-from models import Customer, Product, CustomerProductLink
+from models import Customer, Product, Purchase
 from database import engine, create_db_and_tables
 from datetime import date
 
@@ -28,28 +28,31 @@ def create_customers():
         session.refresh(customer_2)
 
 
-def create_product_customer_link():
+def create_purchases():
     with Session(engine) as session:
-        purchase_1 = CustomerProductLink(customer_id=1, product_id=1, purchase_date=date(day=1, month=11, year=2024))
-        purchase_2 = CustomerProductLink(customer_id=1, product_id=2, purchase_date=date(day=1, month=11, year=2024))
-        purchase_3 = CustomerProductLink(customer_id=2, product_id=2, purchase_date=date(day=24, month=12, year=2023))
+        purchase_1 = Purchase(customer_id=1, product_id=1, purchase_date=date(day=1, month=11, year=2024))
+        purchase_2 = Purchase(customer_id=2, product_id=2, purchase_date=date(day=1, month=11, year=2024))
+        purchase_3 = Purchase(customer_id=2, product_id=2, purchase_date=date(day=24, month=12, year=2023))
+        purchase_4 = Purchase(customer_id=2, product_id=2, purchase_date=date(day=25, month=12, year=2023))
 
         session.add(purchase_1)
         session.add(purchase_2)
         session.add(purchase_3)
+        session.add(purchase_4)
 
         session.commit()
 
         session.refresh(purchase_1)
         session.refresh(purchase_2)
         session.refresh(purchase_3)
+        session.refresh(purchase_4)
 
 
 def main():
     create_db_and_tables()
     create_products()
     create_customers()
-    create_product_customer_link()
+    create_purchases()
 
 if __name__ == "__main__":
     main()
