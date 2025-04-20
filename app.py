@@ -23,7 +23,7 @@ def order_customer_by_purchases():
         return customers
 
 
-@app.get("/products/order_by_price")
+@app.get("/products/order_by_price", response_model=list[Product])
 def order_products_by_price():
     with Session(engine) as session:
         ordered_products = session.exec(select(Product).order_by(desc(Product.price)))

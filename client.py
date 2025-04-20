@@ -36,8 +36,9 @@ def num_purchases_by_product(product_id: int):
 
 
 def products_out_of_stock():
-    data = requests.get(f"{products_url}/out_of_stock").json()
-    for product in data:
+    data = requests.get(f"{products_url}/out_of_stock")
+    print(data.status_code)
+    for product in data.json():
         print(product)
 
 
@@ -134,7 +135,7 @@ def delete_purchase(purchase_id:int):
     print(data.status_code)
 
 def main():
-    delete_customer(5)
+    pass
 
 if __name__ == "__main__":
     main()
